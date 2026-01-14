@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import './App.css';
 
-// 1. 언어별 기본 템플릿과 Judge0 ID 매핑 정보
+// 언어별 기본 템플릿과 Judge0 ID 매핑 정보
 const LANGUAGE_DEFAULTS = {
   java: {
     languageId: 62,
@@ -29,11 +29,11 @@ int main() {
 };
 
 function App() {
-  // 2. 상태 관리 (현재 선택된 언어, 작성된 코드)
+  // 상태 관리 (현재 선택된 언어, 작성된 코드)
   const [language, setLanguage] = useState("java");
   const [code, setCode] = useState(LANGUAGE_DEFAULTS["java"].value);
 
-  // 3. 언어 변경 핸들러
+  // 언어 변경 핸들러
   const handleLanguageChange = (e) => {
     const selectedLang = e.target.value;
     setLanguage(selectedLang);
@@ -41,17 +41,31 @@ function App() {
     setCode(LANGUAGE_DEFAULTS[selectedLang].value);
   };
 
-  // 4. 에디터 내용 변경 핸들러
+  // 에디터 내용 변경 핸들러
   const handleEditorChange = (value) => {
     setCode(value);
   };
 
-  // 5. 실행 버튼 클릭 핸들러 (나중에 API 연결할 곳)
+// 실행 버튼 클릭 핸들러 (수정됨)
   const handleRun = () => {
-    console.log("=== 실행 요청 데이터 ===");
-    console.log("언어:", language);
-    console.log("코드:", code);
-    alert(`실행 요청!\n언어: ${language}\n코드 길이: ${code.length}자`);
+    // 현재 선택된 언어의 Judge0 ID 찾기
+    const currentLangId = LANGUAGE_DEFAULTS[language].languageId;
+
+    // 실제 백엔드로 보낼 데이터 객체 생성 (Judge0 포맷)
+    const requestData = {
+      source_code: code,      // 사용자가 작성한 코드
+      language_id: currentLangId, // 언어 ID (62, 71, 54 등)
+      stdin: "1 2",           // (테스트용) 백준 문제의 입력값 예시
+    };
+
+    // JSON 문자열로 변환 (들여쓰기 2칸 포함)
+    const jsonString = JSON.stringify(requestData, null, 2);
+
+    // 콘솔과 알림창에 출력
+    console.log("=== 백엔드로 전송될 JSON 데이터 ===");
+    console.log(requestData);
+    
+    alert(jsonString);
   };
 
   return (
