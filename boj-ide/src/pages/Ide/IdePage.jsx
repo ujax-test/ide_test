@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 
-import { LANGUAGE_DEFAULTS } from '../../constants/languageData';
+import { LANGUAGE_DEFAULTS } from '../../constants/languageData.js';
 import { detectLanguage } from '../../utils/codeDetector';
 import * as S from './IdeStyles';
 
