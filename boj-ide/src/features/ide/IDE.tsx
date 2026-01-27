@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Badge } from '../../components/ui/Base';
-import { Play, RotateCcw, Save, Settings, CheckCircle2, AlertCircle, Loader2, Share } from 'lucide-react';
+import { Play, RotateCcw, Save, Settings, CheckCircle2, AlertCircle, Loader2, Share, ArrowLeft } from 'lucide-react';
 import Editor from '@monaco-editor/react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { ideCodeState, ideLanguageState, ideOutputState, ideIsExecutingState, navigationState } from '../../store/atoms';
@@ -138,6 +138,10 @@ export const IDE = () => {
       {/* IDE Header */}
       <div className="h-14 border-b border-slate-800 flex items-center justify-between px-4 bg-[#0F1117]">
         <div className="flex items-center gap-4">
+          <Button variant="ghost" size="sm" onClick={() => setPage('problems')}>
+            <ArrowLeft className="w-4 h-4 mr-2" /> 문제집으로
+          </Button>
+          <div className="h-4 w-px bg-slate-800" />
           <div className="flex items-center gap-2">
             <Badge variant="success">Easy</Badge>
             <h1 className="font-semibold text-slate-100">1000. A+B</h1>

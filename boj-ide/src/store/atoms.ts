@@ -15,6 +15,12 @@ export const sidebarOpenState = atom({
   default: true,
 });
 
+// Problem Box State
+export const currentProblemBoxState = atom({
+  key: 'currentProblemBoxState',
+  default: null, // null means showing list of boxes, otherwise contains box ID/Data
+});
+
 // IDE State
 export const ideCodeState = atom({
   key: 'ideCodeState',
